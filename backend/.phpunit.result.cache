@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Unit\\ExampleTest::user_can_login_and_receive_token":8,"Tests\\Unit\\ExampleTest::it_returns_paginated_list_of_courses":8},"times":{"Tests\\Unit\\ExampleTest::test_that_true_is_true":0.432,"Tests\\Unit\\ExampleTest::user_can_login_and_receive_token":0.089,"Tests\\Unit\\ExampleTest::it_returns_paginated_list_of_courses":0.104}}

@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 8,
         color: '#444',
+        alignItems: 'center',
     },
     rolesContainer: {
         marginTop: 12,

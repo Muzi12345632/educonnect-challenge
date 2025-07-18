@@ -25,8 +25,8 @@ export default function CourseDetail() {
             const res = await api.get(`/courses/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log('API response:',res.data)
-            setCourse(res.data);
+            console.log('API response:',res.data.course)
+            setCourse(res.data.course);
         };
         fetchCourse();
     }, []);
@@ -42,10 +42,7 @@ export default function CourseDetail() {
         setQuery(searchTerm);
     };
 
-    const showCourse =
-        course &&
-        (course.name?.toLowerCase().includes(query.toLowerCase()) ||
-            course.description?.toLowerCase().includes(query.toLowerCase()));
+    const showCourse = course && query && course.id === Number(query);
 
     return (
         <ScrollView contentContainerStyle={styles.container}>

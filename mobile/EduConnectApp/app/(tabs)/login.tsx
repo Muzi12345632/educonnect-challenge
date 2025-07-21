@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router';
 import {getToken} from "@/lib/storage";
 import {api} from "@/lib/api";
 
-export default function Index() {
+export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();

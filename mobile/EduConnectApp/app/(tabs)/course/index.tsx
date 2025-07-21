@@ -19,6 +19,7 @@ type Course = {
     name: string;
     description: string;
     price: number;
+    status: string;
 };
 
 export default function CourseList() {
@@ -114,6 +115,7 @@ export default function CourseList() {
                     >
                         <Text style={styles.courseTitle}>{item.name}</Text>
                         <Text>{item.description}</Text>
+                        <Text style={styles.badge}>{item.status}</Text>
                         <Text style={styles.price}>${item.price}</Text>
                     </TouchableOpacity>
                 ))}
@@ -213,5 +215,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         marginTop: 20,
+    },
+    badge: {
+        alignSelf: 'flex-start',
+        backgroundColor: 'steelblue',
+        borderRadius: 12,
+        paddingHorizontal: 10,
+        paddingVertical: 4,
+        marginBottom: 8,
     },
 });

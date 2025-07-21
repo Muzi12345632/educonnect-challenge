@@ -1,10 +1,8 @@
-import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { api } from '@/lib/api';
 import { getToken } from '@/lib/storage';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { ScrollView, View, StyleSheet } from 'react-native';
-
 
 type Course = {
     id: number;
@@ -14,50 +12,51 @@ type Course = {
 };
 
 export default function CourseDetail() {
-    const { id } = useLocalSearchParams();
-    const [course, setCourse] = useState<any>(null);
+    const [course, setCourse] = useState<Course | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [query, setQuery] = useState('');
+    const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchCourse = async () => {
+    const handleSearch = async () => {
+        if (!searchTerm) return;
+
+        try {
             const token = await getToken();
-            const res = await api.get(`/courses/${id}`, {
+            const res = await api.get(`/courses/${searchTerm}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log('API response:',res.data.course)
+
             setCourse(res.data.course);
-        };
-        fetchCourse();
-    }, []);
+            setError('');
+        } catch (err) {
+            console.log('Course not found or API error', err);
+            setCourse(null);
+            setError('No course found with this ID.');
+        }
+    };
 
     const enroll = async () => {
+        if (!course) return;
         const token = await getToken();
-        await api.post(`/courses/${id}/enroll`, {}, {
+        await api.post(`/courses/${course.id}/enroll`, {}, {
             headers: { Authorization: `Bearer ${token}` },
         });
     };
 
-    const handleSearch = () => {
-        setQuery(searchTerm);
-    };
-
-    const showCourse = course && query && course.id === Number(query);
-
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <TextInput
-                placeholder="Search for courses using course_ID"
+                placeholder="Enter Course ID"
                 value={searchTerm}
                 onChangeText={setSearchTerm}
                 mode="outlined"
                 style={styles.input}
+                keyboardType="numeric"
             />
             <Button mode="outlined" onPress={handleSearch} style={styles.searchButton}>
                 Search
             </Button>
 
-            {showCourse ? (
+            {course ? (
                 <View style={styles.courseBox}>
                     <Text style={styles.title}>{course.name}</Text>
                     <Text style={styles.description}>{course.description}</Text>
@@ -65,9 +64,9 @@ export default function CourseDetail() {
                         Enroll
                     </Button>
                 </View>
-            ) : (
-                <Text style={styles.noMatch}>No matching course content found.</Text>
-            )}
+            ) : error ? (
+                <Text style={styles.noMatch}>{error}</Text>
+            ) : null}
         </ScrollView>
     );
 }

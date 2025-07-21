@@ -41,7 +41,7 @@ export default function Profile() {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.title}>User Profile</Text>
+            <Text style={styles.title}>Profile</Text>
 
             {user && (
                 <View style={styles.infoList}>

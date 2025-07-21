@@ -18,7 +18,7 @@ class CourseController extends Controller
 
     public function show($id): \Illuminate\Http\JsonResponse
     {
-        return response()->json(Courses::all()->find($id));
+        return response()->json(Courses::find($id));
     }
 
     public function enroll($id): \Illuminate\Http\JsonResponse

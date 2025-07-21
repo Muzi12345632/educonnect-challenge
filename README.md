@@ -70,7 +70,7 @@ php artisan serve
 
 | Method | Endpoint                   | Description                |
 | ------ | -------------------------- | -------------------------- |
-| POST   | `/api/auth/login`          | Login and receive token    |
+| POST   | `/api/auth/login`          | Index and receive token    |
 | GET    | `/api/courses`             | List all available courses |
 | GET    | `/api/courses/{id}`        | View course details        |
 | POST   | `/api/courses/{id}/enroll` | Enroll in a course         |
@@ -108,7 +108,7 @@ npx expo start
 ```
 
 ### 🔐 Test Credentials
-Use the same test user seeded from the backend:
+Use the same test user seeded from the backend: ``` http://localhost:8081/login```
 
 | Email                                             | Password   | Role    |
 | ------------------------------------------------- | ---------- | ------- |

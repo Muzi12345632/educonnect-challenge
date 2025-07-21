@@ -11,6 +11,7 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method static factory()
  * @method static findOrFail($id)
+ * @method static find($id)
  */
 class Courses extends Model
 {
